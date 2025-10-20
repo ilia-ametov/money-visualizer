@@ -95,6 +95,8 @@ export class App {
 		const settings = this.settings();
 		
 		const rows: Cell[][] = [];
+		const moneyLeftAfterSpent = settings.has - settings.toSpend;
+		const toSpendRoundedToCellWeight = Math.ceil(settings.toSpend / settings.cellWeight) * settings.cellWeight;
 		let currentValue = 0;
 		for (let i = 0; i < settings.rowsCount; i++) {
 			const row: Cell[] = [];
@@ -102,13 +104,13 @@ export class App {
 				currentValue += settings.cellWeight;
 				if (settings.toSpend !== 0) {
 					if (currentValue <= settings.has) {
-						if (currentValue <= settings.toSpend) {
+						if (currentValue <= moneyLeftAfterSpent) {
 							row.push({ type: CellType.has });
 						} else {
 							row.push({ type: CellType.toBeSpent });
 						}
 					} else {
-						if (currentValue <= settings.toSpend) {
+						if (currentValue <= toSpendRoundedToCellWeight) {
 							row.push({ type: CellType.needed });
 						} else {
 							row.push({ type: CellType.empty });
