@@ -5,6 +5,8 @@
 		"ng": "ng",
 		"start": "ng serve",
 		"build": "ng build",
+		"github-build": "ng build --base-href /money-visualizer/",
+		"github-deploy": "npx angular-cli-ghpages --dir=dist/money-visualizer/browser --no-silent",
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test"
 	},
